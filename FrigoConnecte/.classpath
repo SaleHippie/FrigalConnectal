@@ -6,5 +6,8 @@
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jcommon 1.0.23"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jfreechart-1.0.19"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/wewwather-dist"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/wunderground-core-1.0.8"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/yahoo-weather-library"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
