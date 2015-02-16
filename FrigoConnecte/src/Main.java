@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -38,6 +39,7 @@ import com.teknikindustries.yahooweather.WeatherDoc;
 @SuppressWarnings("serial")
 public class Main extends JPanel{
 	private ChartPanel panelStat;
+	private static JButton btnHome = new JButton();
 	private JButton btnStat = new JButton("Données/Statistiques");
 	private JButton btnParam = new JButton("Paramètres");
 	private JButton moduleMeteo = new JButton("Espace météo !!!");
@@ -54,16 +56,17 @@ public class Main extends JPanel{
 	public static void main( String[] arg ) throws Exception
 	{
 
+		
 		window.setContentPane(new Main());;
 		window.pack();
 		window.setResizable(false);
 		window.setVisible( true );
+		window.setLocationRelativeTo(null);
 		window.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-
 
 	}
 
-	protected void render() {
+	/*protected void render() {
 		//Graphics g = getGraphics();
 		/*	if (g != null) {
 			Dimension d = getSize();
@@ -72,17 +75,18 @@ public class Main extends JPanel{
 			// Clear the image background.
 			imageGraphics.setColor(getBackground());
 			imageGraphics.fillRect(0, 0, d.width, d.height);
-			imageGraphics.setColor(getForeground());*/
+			imageGraphics.setColor(getForeground());
 		// Draw this component offscreen.
 		paint();
-		/*// Clean up.
+		/// Clean up.
 			imageGraphics.dispose();
 			g.dispose();
-		}*/
-	}
+		}
+	}*/
 
 	Main() throws Exception{
 		infoRSS = getRSSString();
+		
 		panelInfo.setPreferredSize(new Dimension( 512,400 ) );
 		//mX = panelInfo.getPreferredSize().width
 		panelInfo.add(alerte);
@@ -97,15 +101,33 @@ public class Main extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO désinstencié panelInfo
-
+				
 				JFreeChart chart = createChart(createDataset());
-				//padding.trimHeight(350.0);
 				chart.setPadding(new RectangleInsets(60, 100, 100, 100));
 				panelStat = new ChartPanel(chart);
+				panelStat.setLayout(null);
 				panelInfo.setVisible(false);
+				
+				//Le design c'est de la grosse merde
+				btnHome.setIcon(new ImageIcon("C:\\Users\\jolyma\\Desktop\\home.png"));
+				btnHome.setBounds(80, 5, 40, 40);
+				panelStat.add(btnHome);
+				btnHome.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						
+						panelInfo.setVisible(true);
+						panelStat.setVisible(false);
+						
+					}
+				});
+				
+				
 				panelStat.add( new JLabel("Stat : "));
-				lstStat.addItem("Donnée en temps réel");
+				lstStat.addItem("Données en temps réel");
 				lstStat.addItem("Graphique température");
+				lstStat.setBounds(256, 5, 180, 30);
 				panelStat.add(lstStat);
 
 				panelStat.setVisible(true);
@@ -135,7 +157,7 @@ public class Main extends JPanel{
 					}
 					//mX = panelInfo.getPreferredSize().width;
 				}
-				render();
+				paint();
 			}
 		};
 
@@ -197,6 +219,12 @@ public class Main extends JPanel{
 		return affichage(document.getFirstChild(), 0);
 	}
 
+	/**
+	 * Isole le text compris dans la balise de Titre du fichier XML
+	 * @param N la première balise
+	 * @param profondeur int Hiérarchie
+	 * @return String La valeur comprise dans la balise "title"
+	 */
 	public static String affichage(Node N, int profondeur) {
 		String ret = "";
 		Node fils;
@@ -332,6 +360,9 @@ public class Main extends JPanel{
 
 	}
 
+	/**
+	 * Pour le moment récupert des données météorologique et les impriment dans la console
+	 */
 	private void weather(){
 		// 783058 = code de Lausanne / c = celsius
 		// Instancie la classe WeatherDoc se qui initialise les valeurs
@@ -341,6 +372,7 @@ public class Main extends JPanel{
 		//on créer maintenant un objet dérivé de WeatherDoc pour récupérer les données
 		WeatherDisplay disp = new WeatherDisplay();
 
+		//TODO implémenter la météo dans l'interface
 		//Affichages dans la consoles des valeurs qui peuvent être utiles
 		System.out.println( "Temp : " + disp.getTemperature() + "°" + disp.getTemperatureUnit() );
 		System.out.println("Humidity : " + disp.getHumidity() + "%");
@@ -353,6 +385,11 @@ public class Main extends JPanel{
 		System.out.println(disp.getCountry() );
 	}
 
+	/**
+	 * Converti une donnée (azimuth) en direction
+	 * @param azimuth int compri entre 0 et 360.
+	 * @return String direction en short name (N, SW, etc...)
+	 */
 	private String getDirection(int azimuth){
 
 		//parse the azimuth of compass for the common Users
