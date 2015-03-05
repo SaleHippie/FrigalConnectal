@@ -1,15 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.URL;
 import java.net.URLConnection;
-import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.Hashtable;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -19,16 +18,7 @@ import javax.swing.Timer;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.axis.DateAxis;
-import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.time.Month;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
-import org.jfree.data.xy.XYDataset;
-import org.jfree.ui.RectangleInsets;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
@@ -49,15 +39,14 @@ public class Main extends JPanel{
 	private static JPanel panelInfo = new JPanel();
 	private JPanel panelParam = new JPanel();
 	private JLabel alerte = new JLabel();
-	private JLabel info = new JLabel();
-	private String infoRSS = "Test Info : Ceci est un communiqué !";
+	private String info = getRSSString();
 	public static JFrame window = new JFrame("Frigo connecté");
 	//private float mX;
 
 	public static void main( String[] arg ) throws Exception
 	{
 
-		
+
 		window.setContentPane(new Main());;
 		window.pack();
 		window.setResizable(false);
@@ -86,9 +75,9 @@ public class Main extends JPanel{
 	}*/
 
 	Main() throws Exception{
-	//	infoRSS = getRSSString();
-		
-		panelInfo.setPreferredSize(new Dimension( 512,400 ) );
+		//	infoRSS = getRSSString();
+
+		/*panelInfo.setPreferredSize(new Dimension( 512,400 ) );
 		//mX = panelInfo.getPreferredSize().width
 		panelInfo.add(alerte);
 
@@ -102,28 +91,28 @@ public class Main extends JPanel{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO désinstencié panelInfo
-				
-				
+
+
 			//	chart.setPadding(new RectangleInsets(60, 100, 100, 100));
 				//panelStat = new ChartPanel(chart);
 				panelStat.setLayout(null);
 				panelInfo.setVisible(false);
-				
+
 				//Le design c'est de la grosse merde
 				btnHome.setIcon(new ImageIcon("C:\\Users\\jolyma\\Desktop\\home.png"));
 				btnHome.setBounds(80, 5, 40, 40);
 				panelStat.add(btnHome);
 				btnHome.addActionListener(new ActionListener() {
-					
+
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						
+
 						panelInfo.setVisible(true);
 						panelStat.setVisible(false);
 					}
 				});
-				
-				
+
+
 				panelStat.add( new JLabel("Stat : "));
 				lstStat.addItem("Données en temps réel");
 				lstStat.addItem("Graphique température");
@@ -145,12 +134,157 @@ public class Main extends JPanel{
 		panelInfo.add(moduleMeteo, BorderLayout.CENTER);
 		weather();
 		panelInfo.add(info, BorderLayout.PAGE_END);
+
+
+
+
+		//add(panelWarning, BorderLayout.PAGE_START);
+		add(panelInfo, BorderLayout.PAGE_END);*/
+		GridBagConstraints gridBagConstraints;
+
+		jScrollPane1 = new javax.swing.JScrollPane();
+		jEditorPane1 = new javax.swing.JEditorPane();
+		panelGeneral = new javax.swing.JPanel();
+		infoAlert = new javax.swing.JLabel();
+		infoRSS = new javax.swing.JLabel();
+		panelModuleCentral = new javax.swing.JPanel();
+		btnData = new javax.swing.JButton();
+		btnSetting = new javax.swing.JButton();
+		panelModuleMeteo = new javax.swing.JPanel();
+		panelMeteo = new javax.swing.JPanel();
+		temperature = new javax.swing.JLabel();
+		windForce = new javax.swing.JLabel();
+		sunset = new javax.swing.JLabel();
+		humidity = new javax.swing.JLabel();
+		windDirection = new javax.swing.JLabel();
+		sunrise = new javax.swing.JLabel();
+		conditions = new javax.swing.JLabel();
+		location = new javax.swing.JLabel();
+		meteoBackground = new javax.swing.JLabel();
+		applicationBackground = new javax.swing.JLabel();
+
+		test = new JPanel();
+
+		jScrollPane1.setViewportView(jEditorPane1);
+
+		setPreferredSize(new java.awt.Dimension(512, 400));
+
+		panelGeneral.setBackground(new Color(0,0,0,1));
+		panelGeneral.setLayout(new java.awt.BorderLayout());
+
+		infoAlert.setForeground(new java.awt.Color(255, 0, 0));
+		infoAlert.setText("Alert 1 : votre frigo indique la temperature de 20° :s");
+		panelGeneral.add(infoAlert, java.awt.BorderLayout.NORTH);
+		infoRSS.setPreferredSize(new Dimension( 20,40 ));
+		panelGeneral.add( infoRSS, java.awt.BorderLayout.SOUTH );
+
+		panelModuleCentral.setBackground(new Color(0,0,0,1));
+		panelModuleCentral.setLayout(new java.awt.GridBagLayout());
+
+		btnData.setIcon(new javax.swing.ImageIcon("D:\\DATA\\jolyma\\tools\\images\\Definitif\\BtnDataV2.png")); // NOI18N
+		btnData.setPreferredSize(new java.awt.Dimension(200, 200));
+		panelModuleCentral.add(btnData, new java.awt.GridBagConstraints());
+
+		btnSetting.setIcon(new javax.swing.ImageIcon("D:\\DATA\\jolyma\\tools\\images\\Definitif\\BtnToolsV3.png")); // NOI18N
+		btnSetting.setPreferredSize(new java.awt.Dimension(200, 200));
+		panelModuleCentral.add(btnSetting, new java.awt.GridBagConstraints());
+
+		panelModuleMeteo.setLayout(new BorderLayout());
+
+		panelMeteo.setBackground(new Color(0,0,0,1));
+		panelMeteo.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+		panelMeteo.setLayout(new java.awt.GridBagLayout());
+
+		// initialisation des variables de la météo
+		setWeather();
+
+		temperature.setFont(new java.awt.Font("Meiryo UI", 1, 36)); // NOI18N
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+		gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 4);
+		panelMeteo.add(temperature, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.ipadx = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 3);
+		panelMeteo.add(windForce, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+		panelMeteo.add(sunset, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+		gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 4);
+		panelMeteo.add(humidity, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.ipadx = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 3);
+		panelMeteo.add(windDirection, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 2;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+		panelMeteo.add(sunrise, gridBagConstraints);
+
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 1;
+		gridBagConstraints.gridy = 0;
+		gridBagConstraints.ipadx = 1;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LAST_LINE_START;
+		gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 3);
+		panelMeteo.add(conditions, gridBagConstraints);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 2;
+		gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_START;
+		gridBagConstraints.insets = new java.awt.Insets(0, 2, 0, 7);
+		panelMeteo.add(location, gridBagConstraints);
+		panelMeteo.setBounds(0, 0, 400, 100);
+		panelModuleMeteo.add(panelMeteo);
+		// Défini le background de la météo pour avoir un petit soleil ou un vieux nuage selon la météo
+		meteoBackground.setIcon(new javax.swing.ImageIcon(getBackgroundWeather(conditions.getText()))); // NOI18N
+		meteoBackground.setBounds(0, 0, 400, 0);
+		panelModuleMeteo.add(meteoBackground, BorderLayout.CENTER);
+
+		gridBagConstraints = new java.awt.GridBagConstraints();
+		gridBagConstraints.gridx = 0;
+		gridBagConstraints.gridy = 1;
+		gridBagConstraints.gridwidth = 2;
+		panelModuleCentral.add(panelModuleMeteo, gridBagConstraints);
+
+		panelGeneral.add(panelModuleCentral, java.awt.BorderLayout.CENTER);
+
+		add(panelGeneral);
+		panelGeneral.setBounds(10, 10, 480, 340);
+
+		applicationBackground.setIcon(new javax.swing.ImageIcon("D:\\DATA\\jolyma\\tools\\images\\WallpaperV3.png")); // NOI18N
+		window.getContentPane().add(applicationBackground);
+		applicationBackground.setBounds(0, 0, 500, 370);
+
+		// lance le flux RSS
 		ActionListener taskPerformer = new ActionListener() {
 			public void actionPerformed(ActionEvent evt) {
 				//mX = mX - 1;
-				if( infoRSS.length() == 0 ){
+				if( info.length() == 0 ){
 					try {
-						infoRSS = getRSSString();
+						info = getRSSString();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -161,11 +295,43 @@ public class Main extends JPanel{
 			}
 		};
 
-		Timer  t = new Timer(200, taskPerformer);
+		Timer  t = new Timer(500, taskPerformer);
 		t.start();
 
-		//add(panelWarning, BorderLayout.PAGE_START);
-		add(panelInfo, BorderLayout.PAGE_END);
+
+	}
+
+	private String getBackgroundWeather(String weather) {
+
+		String path = "";
+
+		switch (weather) {
+		case "snow": case "snow flurries":case "light snow showers":case "blowing snow":case "sleet":case "cold":
+			case "scattered snow showers":case "heavy snow":case"snow showers":
+			path = "D:\\DATA\\jolyma\\tools\\images\\Météo\\OK\\MeteoNeigeV1.png";
+			break;
+
+		case "cloudy": case "mostly cloudy": case"partly cloudy":case "windy":
+			path = "D:\\DATA\\jolyma\\tools\\images\\Météo\\OK\\MeteoNuageV2.png";
+			break;
+
+		case "showers":case "freezing rain":case "blustery":case "mixed rain and hail":case "scattered showers":case "hail":
+			path = "D:\\DATA\\jolyma\\tools\\images\\Météo\\OK\\MeteoPluieV1.png";
+			break;
+
+		case "foggy":case "freezing drizzle": case "drizzle": case "dust": case "haze":case "smoky":
+			path = "D:\\DATA\\jolyma\\tools\\images\\Météo\\OK\\MeteoFogV1.png";
+			break;
+
+		case "isolated thunderstorms":case "scattered thunderstorms": case "thundershowers":
+			path = "D:\\DATA\\jolyma\\tools\\images\\Météo\\OK\\MeteoOrageV1.png";
+			break;
+
+		default:
+			path = "D:\\DATA\\jolyma\\tools\\images\\Météo\\OK\\MeteoV2.png";
+			break;
+		}
+		return path;
 	}
 
 	public void paint() {
@@ -174,8 +340,11 @@ public class Main extends JPanel{
 		g.setFont(getFont());
 		g.drawString( infoRSS, (int) mX, panelInfo.getHeight() - 10);
 		g.dispose();*/
-		infoRSS = infoRSS.substring(1);
-		info.setText(infoRSS);
+		info = info.substring(1);
+		infoRSS.setText(info);
+
+		super.updateUI();
+
 	}
 
 	private String getRSSString() throws Exception{
@@ -259,31 +428,31 @@ public class Main extends JPanel{
 		}
 		return ret;
 	}
-	
+
 
 	/**
 	 * Pour le moment récupert des données météorologique et les impriment dans la console
 	 */
-	private void weather(){
+	private void setWeather(){
 		// 783058 = code de Lausanne / c = celsius
 		// Instancie la classe WeatherDoc se qui initialise les valeurs
 		//Supress Warnigs cause the librery is build like that
 		@SuppressWarnings("unused")
+		//TODO Rechercher la valeur dans la bd pour la localisation.  783058
 		WeatherDoc doc = new WeatherDoc("783058", "c");
 		//on créer maintenant un objet dérivé de WeatherDoc pour récupérer les données
 		WeatherDisplay disp = new WeatherDisplay();
 
-		//TODO implémenter la météo dans l'interface
 		//Affichages dans la consoles des valeurs qui peuvent être utiles
-		System.out.println( "Temp : " + disp.getTemperature() + "°" + disp.getTemperatureUnit() );
-		System.out.println("Humidity : " + disp.getHumidity() + "%");
-		System.out.println(disp.getCity() + " " + disp.getCondition());
-		System.out.println("lever : " + disp.getSunrise());
-		System.out.println("coucher : " + disp.getSunset());
+		temperature.setText( disp.getTemperature() + "°" + disp.getTemperatureUnit() );
+		humidity.setText("Humidité : " + disp.getHumidity() + "%");
+		location.setText(disp.getCity() + ", " + disp.getCountry());
+		conditions.setText( disp.getCondition() );
+		sunset.setText("Coucher : " + disp.getSunset());
+		sunrise.setText("Lever : " + disp.getSunrise());
 		String direction = disp.getWindDirection();
-		System.out.println( disp.getWindSpeed() + "m/s" + "|" + (Double.parseDouble(disp.getWindSpeed())*3.6) + "Km/h " + getDirection( Integer.parseInt(direction)  ) + direction );
-		System.out.println("pression : " + disp.getPressure() + disp.getPressureUnit());
-		System.out.println(disp.getCountry() );
+		windForce.setText("Vent : " +  disp.getWindSpeed() + "m/s" );
+		windDirection.setText("Direction : " + getDirection( Integer.parseInt(direction) ) );
 	}
 
 	/**
@@ -323,4 +492,30 @@ public class Main extends JPanel{
 		}
 
 	}
+
+	// Variables declaration - do not modify                     
+	private javax.swing.JLabel windDirection;
+	private javax.swing.JLabel applicationBackground;
+	private javax.swing.JButton btnData;
+	private javax.swing.JButton btnSetting;
+	private javax.swing.JLabel conditions;
+	private javax.swing.JLabel humidity;
+	private javax.swing.JLabel infoAlert;
+	private javax.swing.JLabel infoRSS;
+	private javax.swing.JEditorPane jEditorPane1;
+	private javax.swing.JScrollPane jScrollPane1;
+	private javax.swing.JLabel location;
+	private javax.swing.JLabel meteoBackground;
+	private javax.swing.JPanel panelGeneral;
+	private javax.swing.JPanel panelMeteo;
+	private javax.swing.JPanel panelModuleCentral;
+	private javax.swing.JPanel panelModuleMeteo;
+	private javax.swing.JLabel sunrise;
+	private javax.swing.JLabel sunset;
+	private javax.swing.JLabel temperature;
+	private javax.swing.JLabel windForce;
+
+	private JPanel test;
+	// End of variables declaration        
+
 }

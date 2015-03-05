@@ -9,5 +9,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/wewwather-dist"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/wunderground-core-1.0.8"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/yahoo-weather-library"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/mysql-connector-java-5.0.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javax.mail"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
