@@ -1,10 +1,10 @@
 import java.awt.Color;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 import javax.swing.DefaultComboBoxModel;
@@ -22,7 +22,7 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.plot.XYPlot;
-import org.jfree.data.time.Minute;
+import org.jfree.data.time.Second;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
 import org.jfree.data.xy.XYDataset;
@@ -134,7 +134,7 @@ public class Data extends javax.swing.JFrame {
 
 	private static Connection getDbConnection() throws SQLException, ClassNotFoundException{
 		// TODO complete variable Database
-		String URL = "jdbc:mysql://192.168.188.132:3306/frigalconnectal";
+		String URL = "jdbc:mysql://192.168.188.101:3306/frigalconnectal";
 		String USER = "java";
 		String PASS = ".etml-";
 		
@@ -161,25 +161,42 @@ public class Data extends javax.swing.JFrame {
 			Connection dataFridge = getDbConnection();
 			Statement stmt = dataFridge.createStatement();
 			
-			String sqlRequest = "SELECT * FROM t_temphum";
+			String sqlRequest = "SELECT * FROM `t_temphum`";
 			rs = stmt.executeQuery(sqlRequest); 
+			JOptionPane.showMessageDialog(panelPrincipal ,"After Request","Titre : exception",JOptionPane.ERROR_MESSAGE);
+			Double hum;
+			Double temp;
+			Timestamp date;
 			
 			while(rs.next()){
-				float hum = rs.getFloat("tmp_humidity");
-				float temp = rs.getFloat("tmp_temperature");
-				Date date = rs.getDate("tmp_date");
-				// TODO define time laps chart Second, Minute, Hour, Day, Month, Year
-				s1.add(new Minute(date), hum);
-				s2.add(new Minute(date), temp);
+				hum = rs.getDouble("tmp_humidity");
+				temp = rs.getDouble("tmp_temperature");
+				date = rs.getTimestamp("tmp_date");
+				
+				if( date != null){
+				s1.add(new Second(date), hum);
+				s2.add(new Second(date), temp);
+				}
+				else{
+					JOptionPane.showMessageDialog(panelPrincipal ,"Date null ","Titre : exception",JOptionPane.ERROR_MESSAGE);
+				}
+				JOptionPane.showMessageDialog(panelPrincipal ,"Next !","Titre : exception",JOptionPane.ERROR_MESSAGE);
 			}
-
+			
+			JOptionPane.showMessageDialog(panelPrincipal ,"After value treatment","Titre : exception",JOptionPane.ERROR_MESSAGE);
 			rs.close();
 			stmt.close();
 			dataFridge.close();
-		} catch (SQLException e) {
+		}
+		catch (SQLException e) {
 			String exception = e.toString();
 			JOptionPane.showMessageDialog(panelPrincipal ,"Voici l'exception : " + exception,"Titre : exception",JOptionPane.ERROR_MESSAGE);
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (Exception e){
+			String exception = e.toString();
+			JOptionPane.showMessageDialog(panelPrincipal ,"Voici l'exception : " + exception,"Titre : exception",JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 

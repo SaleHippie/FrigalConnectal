@@ -274,7 +274,7 @@ public class Main extends JPanel{
 		add(panelGeneral);
 		panelGeneral.setBounds(10, 10, 480, 340);
 
-		applicationBackground.setIcon(new javax.swing.ImageIcon("D:\\DATA\\jolyma\\tools\\images\\WallpaperV3.png")); // NOI18N
+		applicationBackground.setIcon(new javax.swing.ImageIcon("D:\\DATA\\jolyma\\tools\\images\\WallpaperV3.png")); // NOI18N 
 		window.getContentPane().add(applicationBackground);
 		applicationBackground.setBounds(0, 0, 500, 370);
 

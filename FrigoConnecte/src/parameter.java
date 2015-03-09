@@ -1,3 +1,5 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Properties;
 
 import javax.mail.Message;
@@ -68,6 +70,23 @@ public class parameter extends javax.swing.JFrame {
 		btnHome.setText("H");
 		btnHome.setPreferredSize(new java.awt.Dimension(40, 40));
 		btnHome.setBounds(0, 0, 40, 40);
+		btnHome.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Delete this shit temp use for démo
+				//envoi un mail à yannis
+				try {
+					sendMail();
+				} catch (AddressException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (MessagingException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		Header.add(btnHome);
 
 		title.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -194,10 +213,11 @@ public class parameter extends javax.swing.JFrame {
 	 * @throws AddressException 
 	 */
 	private void sendMail() throws AddressException, MessagingException{
-	    String to = "";
+	    String to = "yayouzer@gmail.com";
 	    final String username = "frigo.connecte@gmail.com";
 	    final String password = ".Etml-44";
 	 
+	    //Set les propriétés de la connection SMTP
 	    Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.socketFactory.port", "465");
@@ -206,14 +226,15 @@ public class parameter extends javax.swing.JFrame {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.port", "465");
 	 
+		// connection
 		Session session = Session.getDefaultInstance(props,
 				new javax.mail.Authenticator() {
 					protected PasswordAuthentication getPasswordAuthentication() {
 						return new PasswordAuthentication( username, password );
 					}
 				});
-	    session.setDebug(true);
-	 
+	    
+	    //set le mail
 	    Message message = new MimeMessage(session);
 		message.setFrom(new InternetAddress("from@no-spam.com"));
 		message.setRecipients(Message.RecipientType.TO,
@@ -221,7 +242,7 @@ public class parameter extends javax.swing.JFrame {
 		message.setSubject("Testing Subject");
 		message.setText("Salut mec," +
 				"\n\n Check ton frigo ça chauffe !");
-
+		//envoie le mail
 		Transport.send(message);
 	}
 	
